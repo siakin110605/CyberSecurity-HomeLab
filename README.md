@@ -6,7 +6,7 @@ This is not a list of tutorials followed step by step. Each lab is designed, bui
 
 ## Why this exists
 
-I am a Computer Science student moving into a SOC / security analyst role, and I wanted a portfolio that demonstrates hands-on infrastructure and security work, not just coursework. Every lab here starts from a design decision, gets implemented in a real (virtual) environment, gets independently verified with the appropriate tools, and gets written up including the mistakes made along the way.
+I created this homelab to deepen my practical cybersecurity skills through hands-on experimentation. My goal is to understand how secure systems are designed, configured, hardened, verified, and maintained while documenting the complete engineering process—from planning and implementation to troubleshooting and validation.Rather than simply following tutorials, this repository documents the reasoning behind every decision, the challenges encountered, and the lessons learned throughout the project.
 
 ## Lab Index
 
