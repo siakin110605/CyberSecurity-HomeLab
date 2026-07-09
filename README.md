@@ -1,4 +1,4 @@
-# CyberSecurity Homelab
+# Cyber Security Homelab
 
 A self-directed, hands-on cybersecurity homelab built from scratch in VirtualBox: infrastructure, hardening, network security, web security, monitoring, and SOC-style analysis, each documented as a standalone lab with real command output, screenshots, and a written record of what actually went wrong and how it was diagnosed.
 
