@@ -12,13 +12,13 @@ I created this homelab to deepen my practical cybersecurity skills through hands
 
 | Lab | Topic | Status |
 |-----|-------|--------|
-| [Lab 01](Lab-01-Infrastructure-and-Secure-Remote-Access/) | Infrastructure and Secure Remote Access | Complete |
-| [Lab 02](Lab-02-Linux-Hardening/) | Enterprise Linux Hardening and Security Baseline | Complete |
-| Lab 03 | Network Security | Planned |
-| Lab 04 | Web Security | Planned |
-| Lab 05 | Monitoring | Planned |
-| Lab 06 | SOC | Planned |
-| Lab 07 | Final Enterprise Scenario | Planned |
+| [Lab 01](Lab-01-Infrastructure-and-Secure-Remote-Access/) | Secure Infrastructure & Remote Access | ✅ Complete |
+| [Lab 02](Lab-02-Linux-Hardening/) | Enterprise Linux Hardening & Security Baseline | ✅ Complete |
+| Lab 03 | Network Security & Traffic Analysis | 🟡 Planned |
+| Lab 04 | Web Application Security Assessment | 🟡 Planned |
+| Lab 05 | Detection Engineering & System Monitoring | 🟡 Planned |
+| Lab 06 | Windows Security & Active Directory | 🟡 Planned |
+| Lab 07 | Enterprise Attack Simulation & Incident Response | 🟡 Planned |
 
 Each lab folder is self-contained and includes:
 
