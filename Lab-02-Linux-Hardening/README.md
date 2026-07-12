@@ -280,11 +280,11 @@ Full write-up in [`lessons-learned.md`](lessons-learned.md). The core lesson fro
 
 ## Skills Demonstrated
 
-- Linux system administration and baseline security assessment
+- Linux Security Hardening and baseline assessment
 - Account and password policy hardening
-- Firewall management and verification (UFW)
+- Host Firewall Administration (UFW)
 - Network service enumeration and attack surface reduction
-- SSH security configuration
+- Secure Remote Access Hardening
 - Linux Audit Framework (`auditd`) deployment
 - Detection engineering: writing and proving a rule for a specific, security-relevant event
 - MITRE ATT&CK-informed defensive reasoning
