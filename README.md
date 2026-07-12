@@ -13,7 +13,7 @@ I am a Computer Science student moving into a SOC / security analyst role, and I
 | Lab | Topic | Status |
 |-----|-------|--------|
 | [Lab 01](Lab-01-Infrastructure-and-Secure-Remote-Access/) | Infrastructure and Secure Remote Access | Complete |
-| Lab 02 | Linux Hardening | Planned |
+| [Lab 02](Lab-02-Linux-Hardening/) | Enterprise Linux Hardening and Security Baseline | Complete |
 | Lab 03 | Network Security | Planned |
 | Lab 04 | Web Security | Planned |
 | Lab 05 | Monitoring | Planned |
