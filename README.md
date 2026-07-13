@@ -14,7 +14,7 @@ I created this homelab to deepen my practical cybersecurity skills through hands
 |-----|-------|--------|
 | [Lab 01](Lab-01-Infrastructure-and-Secure-Remote-Access/) | Secure Infrastructure & Remote Access | ✅ Complete |
 | [Lab 02](Lab-02-Linux-Hardening/) | Enterprise Linux Hardening & Security Baseline | ✅ Complete |
-| Lab 03 | Network Security & Traffic Analysis | 🟡 Planned |
+| [Lab 03](Lab-03-Network-Security-and-Traffic-Analysis/) | Network Security & Traffic Analysis | ✅ Complete |
 | Lab 04 | Web Application Security Assessment | 🟡 Planned |
 | Lab 05 | Detection Engineering & System Monitoring | 🟡 Planned |
 | Lab 06 | Windows Security & Active Directory | 🟡 Planned |
