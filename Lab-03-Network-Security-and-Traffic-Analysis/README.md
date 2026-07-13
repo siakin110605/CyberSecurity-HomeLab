@@ -334,6 +334,20 @@ TLS Client Hello (plaintext negotiation, then encrypted)
 | SMB | 445/tcp | Filtered / closed | Good, no reason to be open |
 | All other TCP ports (1-65535) | - | Filtered / closed | Confirmed by full-range scan, Finding 10 |
 
+No unnecessary services were observed. The results validate the hardening work performed in Lab 02: CUPS and Avahi, both explicitly disabled there, do not appear anywhere in this lab's scans, and the only reachable service is the one that was always meant to be reachable.
+
+## MITRE ATT&CK Mapping
+
+Not a full ATT&CK Navigator layer, just an illustration of which reconnaissance techniques this lab's activities correspond to. Framed here as the defensive validation of an attack surface, the same techniques an adversary's own reconnaissance would use.
+
+| Activity | Related ATT&CK Technique(s) | Relationship |
+|---|---|---|
+| Host discovery (Finding 1) | T1018 - Remote System Discovery | Reconnaissance |
+| Port and service scanning (Findings 2, 3, 10) | T1046 - Network Service Discovery | Reconnaissance |
+| Nmap-based active scanning methodology | T1595 - Active Scanning; T1595.001 - Scanning IP Blocks | Reconnaissance |
+| SSH/service fingerprinting (Findings 3, 4) | T1592.002 - Gather Victim Host Information: Software | Reconnaissance |
+| Packet capture and traffic inspection (Findings 5-9) | T1040 - Network Sniffing | Collection |
+
 ## Security Assessment: Is the Host Adequately Exposed?
 
 **Yes.** The evidence supports this conclusion directly:
@@ -385,7 +399,7 @@ Full write-up in [`lessons-learned.md`](lessons-learned.md). The short version: 
 
 **Lab 04: Web Application Security Assessment** *(planned)*
 
-Shifts focus from network-layer and transport-layer analysis to the application layer, assessing a web application running on infrastructure built the same way as Labs 01 through 03.
+The next lab shifts from network-level visibility to application-layer assessment, using the same hardened infrastructure as the target. Where this lab asked "what can be seen and reached from the network," Lab 04 asks the equivalent question one layer up: what can be seen and reached inside the application itself.
 
 ---
 
