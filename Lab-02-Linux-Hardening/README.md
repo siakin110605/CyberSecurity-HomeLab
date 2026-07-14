@@ -291,20 +291,13 @@ Full write-up in [`lessons-learned.md`](lessons-learned.md). The core lesson fro
 
 ## Next Phase
 
-**Lab 2.5: Extended Hardening** *(planned)*
+Several controls were deliberately scoped out of this lab to keep it focused and demo-able. Fail2Ban, Lynis, and an independent `ssh-audit` review of the SSH service are addressed in depth in **[Lab 04: SSH Hardening & Secure Remote Access](../Lab-04-SSH-Hardening-and-Secure-Remote-Access/)**, which takes the SSH service specifically and carries it through a full assessment-to-validation cycle.
 
-The following controls were deliberately scoped out of this lab to keep it focused and demo-able, and will land in a smaller follow-up lab rather than being bolted onto this one:
+Still open for a future lab: AIDE (file integrity monitoring, extending the detection work started here), `unattended-upgrades` (automatic security patching), persisting the `/etc/passwd` audit rule across reboots, additional `auditd` rules, `logrotate`, AppArmor policy review, and `sysctl` kernel hardening.
 
-- Fail2Ban (automated response to repeated failed SSH attempts)
-- AIDE (file integrity monitoring, extending the detection work started here)
-- Lynis (automated security auditing/benchmarking)
-- `unattended-upgrades` (automatic security patching)
-- Persisting the `/etc/passwd` audit rule across reboots
-- Additional `auditd` rules, `logrotate`, AppArmor policy review, `sysctl` kernel hardening
+**Lab 03: Network Security & Traffic Analysis** *(complete)*
 
-**Lab 03: Network Security** *(planned)*
-
-Shifts focus from the host itself to the network layer it sits on.
+Shifts focus from the host itself to the network layer it sits on, and validates this lab's hardening from an independent vantage point.
 
 ---
 

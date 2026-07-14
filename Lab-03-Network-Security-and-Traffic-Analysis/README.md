@@ -397,9 +397,9 @@ Full write-up in [`lessons-learned.md`](lessons-learned.md). The short version: 
 
 ## Next Phase
 
-**Lab 04: Web Application Security Assessment** *(planned)*
+**Lab 04: SSH Hardening & Secure Remote Access** *(planned)*
 
-The next lab shifts from network-level visibility to application-layer assessment, using the same hardened infrastructure as the target. Where this lab asked "what can be seen and reached from the network," Lab 04 asks the equivalent question one layer up: what can be seen and reached inside the application itself.
+Finding 2 through Finding 4 above established that SSH is the only exposed service on this host and profiled it from the outside: open port, software version, offered algorithms. The next lab takes that single service and carries it through a complete assessment-to-hardening-to-validation cycle, adding brute-force protection (Fail2Ban), an independent configuration audit (Lynis, `ssh-audit`), and a move to key-only authentication with password and root login explicitly disabled and verified.
 
 ---
 
