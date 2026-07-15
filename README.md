@@ -1,32 +1,47 @@
 # Cyber Security Homelab
 
-A self-directed, hands-on cybersecurity homelab built from scratch in VirtualBox: infrastructure, hardening, network security, and secure service deployment, each documented as a standalone lab with real command output, screenshots, and a written record of what actually went wrong and how it was diagnosed.
-
-This is not a list of tutorials followed step by step. Each lab follows the same repeatable pattern (Scenario -> Objectives -> Implementation -> Validation -> Lessons Learned), is verified independently rather than assumed to work because a config file was written, and is documented the way a real infrastructure or security change would be documented on the job.
+A hands-on cybersecurity homelab focused on infrastructure, Linux hardening, network analysis, and secure service deployment. Each lab is built incrementally, independently validated, and documented using a consistent engineering methodology.
 
 ## Why This Exists
 
-I created this homelab to deepen my practical cybersecurity skills through hands-on experimentation. My goal is to understand how secure systems are designed, configured, hardened, verified, and maintained while documenting the complete engineering process,from planning and implementation to troubleshooting and validation.Rather than simply following tutorials, this repository documents the reasoning behind every decision, the challenges encountered, and the lessons learned throughout the project.
+I created this homelab to deepen my practical cybersecurity skills through hands-on experimentation, documenting the reasoning behind every decision, not just the commands that were run.
 
 ## Learning Path
 
-```mermaid
-graph TD
-    L1["Lab 01<br/>Secure Infrastructure & Remote Access"]
-    L2["Lab 02<br/>Linux Hardening & Security Baseline"]
-    L3["Lab 03<br/>Network Security & Traffic Analysis"]
-    L4["Lab 04<br/>SSH Hardening & Secure Remote Access"]
-    L5["Lab 05<br/>Web Application Security Assessment"]
-    L6["Lab 06<br/>Detection Engineering & Monitoring"]
-    L7["Lab 07<br/>Windows Security & Active Directory"]
-    L8["Lab 08<br/>Enterprise Attack Simulation & IR"]
+```
+Lab 01
+Secure Infrastructure & Remote Access
+   |
+   v
+Lab 02
+Linux Hardening & Security Baseline
+   |
+   v
+Lab 03
+Network Security & Traffic Analysis
+   |
+   v
+Lab 04
+SSH Hardening & Secure Remote Access
 
-    L1 --> L2 --> L3 --> L4 --> L5 --> L6 --> L7 --> L8
+──────────────────────────
 
-    classDef done fill:#1a4d2e,stroke:#4caf50,color:#fff
-    classDef planned fill:#3a2f00,stroke:#c9a227,color:#fff
-    class L1,L2,L3,L4 done
-    class L5,L6,L7,L8 planned
+Upcoming
+
+Lab 05
+Web Application Security Assessment
+   |
+   v
+Lab 06
+Detection Engineering & Monitoring
+   |
+   v
+Lab 07
+Windows Security & Active Directory
+   |
+   v
+Lab 08
+Enterprise Attack Simulation & Incident Response
 ```
 
 ## Lab Index
@@ -77,6 +92,12 @@ Each lab folder is self-contained and includes:
 - **Virtual machines:** Kali Linux (attack / client box), Ubuntu Server 24.04 LTS (hardening target)
 - **Networking:** isolated internal network for all inter-VM lab traffic, NAT reserved only for internet/package access
 - **Approach:** every configuration change is independently verified (`ping`, `ssh -v`, `nmap`, `ufw status`, `ausearch`, `fail2ban-client`, etc.) rather than assumed to have taken effect
+
+## Project Philosophy
+
+- Build first.
+- Verify every change.
+- Document every decision.
 
 ## License
 
