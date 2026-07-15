@@ -27,27 +27,6 @@ Each lab folder is self-contained and includes:
 - `screenshots/`: the evidence for every claim made in the README
 - `architecture/`: network/architecture diagrams for that lab
 
-## Skills Matrix
-
-| Skill | Lab(s) |
-|---|---|
-| Virtualization & Network Design (VirtualBox) | 01 |
-| SSH Key-Based Authentication | 01, 04 |
-| Linux Firewall Administration (UFW) | 01, 02 |
-| Linux System Administration | 01, 02, 04 |
-| Account & Password Policy Hardening | 02 |
-| Attack Surface Reduction | 02, 04 |
-| Linux Audit Framework (`auditd`) | 02 |
-| Detection Engineering | 02 |
-| MITRE ATT&CK-Informed Analysis | 02, 03 |
-| Network Reconnaissance & Host Discovery | 03, 04 |
-| Nmap (scanning, service detection, NSE scripts) | 03, 04 |
-| Wireshark & Packet-Level Protocol Analysis | 03 |
-| TCP/IP, DNS, and TLS Traffic Analysis | 03 |
-| Vulnerability & Configuration Auditing (Lynis, `ssh-audit`) | 04 |
-| Brute-Force Mitigation (Fail2Ban) | 04 |
-| Security Control Validation (proving, not assuming) | 02, 03, 04 |
-
 ## Environment
 
 - **Hypervisor:** Oracle VirtualBox
