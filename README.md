@@ -6,48 +6,10 @@ A hands-on cybersecurity homelab focused on infrastructure, Linux hardening, net
 
 I created this homelab to deepen my practical cybersecurity skills through hands-on experimentation, documenting the reasoning behind every decision, not just the commands that were run.
 
-## Learning Path
-
-```
-Lab 01
-Secure Infrastructure & Remote Access
-   |
-   v
-Lab 02
-Linux Hardening & Security Baseline
-   |
-   v
-Lab 03
-Network Security & Traffic Analysis
-   |
-   v
-Lab 04
-SSH Hardening & Secure Remote Access
-
-──────────────────────────
-
-Upcoming
-
-Lab 05
-Web Application Security Assessment
-   |
-   v
-Lab 06
-Detection Engineering & Monitoring
-   |
-   v
-Lab 07
-Windows Security & Active Directory
-   |
-   v
-Lab 08
-Enterprise Attack Simulation & Incident Response
-```
-
 ## Lab Index
 
 | Lab | Topic | Status |
-|-----|-------|--------|
+|:---:|-------|:------:|
 | [Lab 01](Lab-01-Infrastructure-and-Secure-Remote-Access/) | Secure Infrastructure & Remote Access | ✅ Complete |
 | [Lab 02](Lab-02-Linux-Hardening/) | Enterprise Linux Hardening & Security Baseline | ✅ Complete |
 | [Lab 03](Lab-03-Network-Security-and-Traffic-Analysis/) | Network Security & Traffic Analysis | ✅ Complete |
