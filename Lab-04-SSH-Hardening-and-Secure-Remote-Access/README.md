@@ -267,6 +267,18 @@ ssh-audit 192.168.56.20
 | Independent SSH Security Audit | Yes |
 | End-to-End Validation | Yes |
 
+## MITRE ATT&CK Mapping
+
+Not a full ATT&CK Navigator layer, just an illustration of which techniques this lab's controls address, framed from the defensive side of each technique.
+
+| Control | Related ATT&CK Technique(s) | Relationship |
+|---|---|---|
+| Fail2Ban deployment and live brute-force test | T1110 - Brute Force | Mitigation and detection |
+| SSH exposed as the only remote access path, hardened | T1021.004 - Remote Services: SSH | Mitigation |
+| Password authentication disabled, key-only login enforced | T1078 - Valid Accounts | Mitigation |
+| Root login disabled | T1078.003 - Valid Accounts: Local Accounts | Mitigation |
+| Lynis and `ssh-audit` independent configuration review | T1595.002 - Active Scanning: Vulnerability Scanning (defensive analogue) | Validation |
+
 ## Problems Encountered
 
 Restarting the SSH service mid-lab (`sudo systemctl restart ssh`) failed outright:

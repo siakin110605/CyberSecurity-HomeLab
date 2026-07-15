@@ -9,13 +9,13 @@
 | **Duration** | ~4 hours (across two sessions) |
 | **Tools** | VirtualBox, Kali Linux, Ubuntu Server, OpenSSH, UFW, Nmap |
 
-## 1. Overview
+## Executive Summary
 
 This lab is the foundation of the CyberSecurity Homelab series. Before any hardening, monitoring, or attack simulation work can happen, there needs to be a controlled, isolated environment with reliable, authenticated remote access between machines. That is the entire scope of this lab: build a two-machine virtual network, get one machine to act as a target server and the other as an attacker/client workstation, and establish SSH access between them that is authenticated by keys rather than passwords, restricted by a firewall, and verified independently rather than just assumed to work.
 
 Every later lab in this series (Linux hardening, network security, web security, monitoring, SOC work, and the final enterprise scenario) builds directly on top of the infrastructure documented here. The static IP addressing, the SSH trust relationship, and the firewall baseline established in this lab are not rebuilt from scratch each time. They carry forward.
 
-## 2. Objectives
+## Objectives
 
 - Build a two-VM virtual lab using VirtualBox: one Kali Linux attack/client box, one Ubuntu Server target.
 - Design and implement an isolated internal network, separate from NAT/internet-facing traffic.
@@ -26,7 +26,7 @@ Every later lab in this series (Linux hardening, network security, web security,
 - Independently verify every claim above (connectivity, authentication method, exposed ports) using `ping`, `ssh -v`, `ufw status`, and `nmap`, rather than trusting that a config file was applied correctly.
 - Document exactly what went wrong during the build and how it was diagnosed and fixed.
 
-## 3. Lab Architecture
+## Architecture
 
 The lab runs entirely inside Oracle VirtualBox on a single host machine. Two virtual machines are connected through a dedicated **Internal Network** named `CyberLab`, which is invisible to the host's physical LAN and to any other VirtualBox network on the system. A second network adapter on each VM is attached to **NAT**, used exclusively so each machine can reach the internet for package updates. No lab traffic between Kali and Ubuntu ever touches the NAT adapter.
 
@@ -34,7 +34,7 @@ This separation matters for a simple reason: if the "attack" traffic and the "in
 
 See [`architecture/network-diagram.md`](architecture/network-diagram.md) for the full diagram, including a Mermaid version that renders natively on GitHub and GitLab.
 
-## 4. Virtual Machines
+## Virtual Machines
 
 | | Kali Linux | Ubuntu Server |
 |---|---|---|
@@ -54,7 +54,7 @@ See [`architecture/network-diagram.md`](architecture/network-diagram.md) for the
 ![VirtualBox network settings showing the internal network adapter](screenshots/01-virtualbox-network-settings.png)
 *VirtualBox network configuration for the internal network adapter, named `CyberLab`.*
 
-## 5. Network Topology
+## Network Topology
 
 Both VMs use two adapters each:
 
@@ -83,9 +83,9 @@ $ ip addr show enp0s8
 
 Full diagram: [`architecture/network-diagram.md`](architecture/network-diagram.md).
 
-## 6. SSH Configuration
+## SSH Configuration
 
-### 6.1 Installing OpenSSH
+### Installing OpenSSH
 
 The Ubuntu Server ISO does not ship with an SSH server enabled out of the box in this install, so the first `systemctl status ssh` check (run before installation) correctly failed:
 
@@ -110,14 +110,14 @@ LISTEN 0      4096         0.0.0.0:22        0.0.0.0:*
 LISTEN 0      4096            [::]:22           [::]:*
 ```
 
-### 6.2 First Connection (Password Authentication)
+### First Connection (Password Authentication)
 
 Before moving to key-based authentication, a normal password login was used to confirm basic reachability end to end: network path, SSH daemon, and account credentials.
 
 ![First SSH login using a password, from Kali to Ubuntu](screenshots/03-ssh-password-login.png)
 *Initial SSH connection from Kali to Ubuntu using password authentication. The host key fingerprint is accepted on first connection and stored in `known_hosts`.*
 
-### 6.3 SSH Key Generation and Installation
+### SSH Key Generation and Installation
 
 An ED25519 key pair was generated on Kali:
 
@@ -133,7 +133,7 @@ ssh-copy-id sia@192.168.56.20
 
 ED25519 was chosen over RSA for this lab because it offers equivalent or stronger security with a much shorter key, and is the current recommended default for new SSH keys.
 
-### 6.4 Verifying Key-Based Authentication
+### Verifying Key-Based Authentication
 
 Rather than assuming the key was picked up correctly, verbose SSH output was used to confirm the exact authentication method used for the session:
 
@@ -148,7 +148,7 @@ debug1: Authenticated to 192.168.56.20 ([192.168.56.20]:22) using "publickey".
 ![Verbose SSH output confirming key-based authentication succeeded](screenshots/04-ssh-key-authentication-verbose.png)
 *The line "Authenticated to 192.168.56.20 using publickey" is the definitive confirmation that key-based auth is working, not just that a connection was accepted.*
 
-### 6.5 Hardening `sshd_config`
+### Hardening `sshd_config`
 
 Only after key authentication was confirmed working was password authentication disabled:
 
@@ -166,7 +166,7 @@ sudo sshd -t
 sudo systemctl restart ssh
 ```
 
-## 7. Firewall Configuration
+## Firewall Configuration
 
 UFW (Uncomplicated Firewall) was configured with a default-deny posture on incoming traffic, and a single explicit allow rule for SSH:
 
@@ -197,7 +197,7 @@ To                         Action      From
 
 This is a deny-by-default model: nothing reaches the server unless there is an explicit rule for it. As later labs add services (web, monitoring agents), each one will require its own deliberate rule, rather than the server being open by default and locked down reactively.
 
-## 8. Verification
+## Verification
 
 Every claim in this document was independently verified rather than assumed.
 
@@ -235,7 +235,17 @@ MAC Address: 08:00:27:0A:AE:8D (Oracle VirtualBox virtual NIC)
 
 Nmap confirms, from an outside vantage point, exactly what the firewall configuration claims: the only reachable service on this host is SSH. That agreement between "what the config says" and "what a network scan actually observes" is the whole point of running verification tools instead of trusting configuration files at face value.
 
-## 9. Problems Encountered
+## MITRE ATT&CK Mapping
+
+Not a full ATT&CK Navigator layer, just an illustration of which techniques this lab's controls address.
+
+| Control | Related ATT&CK Technique(s) | Relationship |
+|---|---|---|
+| SSH key-based authentication, password login disabled | T1078 - Valid Accounts | Mitigation |
+| SSH as the sole remote access method, hardened | T1021.004 - Remote Services: SSH | Mitigation |
+| UFW default-deny firewall | T1046 - Network Service Discovery | Mitigation |
+
+## Problems Encountered
 
 This section covers the SSH key authentication issue encountered during setup, since working through it (rather than avoiding it) is the most useful part of this lab to document.
 
@@ -292,20 +302,23 @@ Once the correct key pair was in place and confirmed working, `PasswordAuthentic
 - Verbose output shows `Authenticated to 192.168.56.20 using "publickey"`.
 - `nmap` confirms only TCP/22 is reachable, meaning the fallback of a broader, less restricted access path never had to be opened to work around the issue.
 
-## 10. Lessons Learned
+## Lessons Learned
 
 The full reflection is in [`lessons-learned.md`](lessons-learned.md). The short version: validate before you lock down, read error messages literally before assuming a more complex cause, and use verbose debugging tools early rather than as a last resort.
 
-## 11. Future Improvements (Lab 02 and beyond)
+## Skills Demonstrated
 
-This lab intentionally stops at "secure remote access is working and verified." It does not yet cover:
+- Virtualization and network design (VirtualBox, isolated internal network, static IP addressing)
+- SSH server installation and key-based authentication (ED25519)
+- Linux firewall administration (UFW, default-deny posture)
+- Security verification methodology (`ping`, `ssh -v`, `ufw status`, `nmap`)
+- systemd service troubleshooting and configuration validation (`sshd -t`)
 
-- User account policy and `sudo` privilege restrictions on the Ubuntu server.
-- Kernel and OS-level hardening (sysctl parameters, auditd, unattended upgrades).
-- Centralized logging of authentication attempts.
-- Fail2ban or another mechanism to rate-limit repeated failed SSH attempts.
+## Next Phase
 
-All of the above is the explicit scope of **Lab 02: Linux Hardening**, which builds directly on the static IP addressing, SSH key trust, and UFW baseline established here.
+**Lab 02: Enterprise Linux Hardening & Security Baseline** *(complete)*
+
+This lab intentionally stops at "secure remote access is working and verified." It does not yet cover account policy and `sudo` privilege restrictions, kernel and OS-level hardening, centralized logging of authentication attempts, or brute-force protection. All of that is the explicit scope of Lab 02, which builds directly on the static IP addressing, SSH key trust, and UFW baseline established here.
 
 ---
 
