@@ -2,6 +2,13 @@
 
 `Ubuntu 24.04` `Kali Linux` `VirtualBox` `Nmap` `Wireshark` `Blue Team` `Network Security`
 
+| | |
+|---|---|
+| **Focus** | Validating the Lab 02 hardening from the network: attack surface, service fingerprinting, protocol-level traffic analysis |
+| **Difficulty** | Intermediate |
+| **Duration** | ~2.5 hours |
+| **Tools** | Nmap, Nmap NSE, Wireshark |
+
 ## Architecture
 
 ```mermaid
@@ -404,3 +411,7 @@ Finding 2 through Finding 4 above established that SSH is the only exposed servi
 ---
 
 **Environment note:** this lab performed read-only reconnaissance and traffic analysis only. No exploitation tools (Hydra, Metasploit, or similar) were used, and no attempt was made to gain unauthorized access to either VM. That scope is intentionally reserved for a later, explicitly-scoped lab.
+
+---
+
+[⬅️ Previous: Lab 02 - Linux Hardening](../Lab-02-Linux-Hardening/README.md) &nbsp;|&nbsp; [🏠 Home](../README.md) &nbsp;|&nbsp; [➡️ Next: Lab 04 - SSH Hardening & Secure Remote Access](../Lab-04-SSH-Hardening-and-Secure-Remote-Access/README.md)

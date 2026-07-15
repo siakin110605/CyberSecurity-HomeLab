@@ -1,5 +1,14 @@
 # Lab 01: Infrastructure and Secure Remote Access
 
+`Ubuntu 24.04` `Kali Linux` `VirtualBox` `OpenSSH` `UFW` `Blue Team` `Infrastructure`
+
+| | |
+|---|---|
+| **Focus** | Building the two-VM lab and establishing secure, key-based remote access |
+| **Difficulty** | Beginner |
+| **Duration** | ~4 hours (across two sessions) |
+| **Tools** | VirtualBox, Kali Linux, Ubuntu Server, OpenSSH, UFW, Nmap |
+
 ## 1. Overview
 
 This lab is the foundation of the CyberSecurity Homelab series. Before any hardening, monitoring, or attack simulation work can happen, there needs to be a controlled, isolated environment with reliable, authenticated remote access between machines. That is the entire scope of this lab: build a two-machine virtual network, get one machine to act as a target server and the other as an attacker/client workstation, and establish SSH access between them that is authenticated by keys rather than passwords, restricted by a firewall, and verified independently rather than just assumed to work.
@@ -303,3 +312,7 @@ All of the above is the explicit scope of **Lab 02: Linux Hardening**, which bui
 **Snapshot.** Both VMs were snapshotted after this lab was completed and verified, under the name `Lab-01-Completed`, to preserve a known-good baseline to branch from before starting Lab 02.
 
 ![VirtualBox snapshot manager showing the Lab-01-Completed snapshot for both VMs](screenshots/09-vm-snapshot-lab01-completed.png)
+
+---
+
+[🏠 Home](../README.md) &nbsp;|&nbsp; [➡️ Next: Lab 02 - Linux Hardening](../Lab-02-Linux-Hardening/README.md)

@@ -2,6 +2,13 @@
 
 `Ubuntu 24.04` `VirtualBox` `Blue Team` `Linux Security` `UFW` `SSH Hardening` `auditd` `Detection Engineering`
 
+| | |
+|---|---|
+| **Focus** | Assessing and hardening the Ubuntu host from the inside: accounts, passwords, firewall, services, SSH, auditing |
+| **Difficulty** | Intermediate |
+| **Duration** | ~1 hour |
+| **Tools** | Ubuntu Server, UFW, `chage`, `auditd`, `ausearch`, `systemctl` |
+
 ## Architecture
 
 ```mermaid
@@ -302,3 +309,7 @@ Shifts focus from the host itself to the network layer it sits on, and validates
 ---
 
 **Environment note:** this lab was performed entirely on the Ubuntu Server VM (`192.168.56.20`) from Lab 01. No changes were made to the Kali attack box or the network topology.
+
+---
+
+[⬅️ Previous: Lab 01 - Infrastructure & Remote Access](../Lab-01-Infrastructure-and-Secure-Remote-Access/README.md) &nbsp;|&nbsp; [🏠 Home](../README.md) &nbsp;|&nbsp; [➡️ Next: Lab 03 - Network Security & Traffic Analysis](../Lab-03-Network-Security-and-Traffic-Analysis/README.md)

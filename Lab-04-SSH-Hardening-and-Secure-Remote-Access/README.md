@@ -2,6 +2,13 @@
 
 `Ubuntu 24.04` `Kali Linux` `OpenSSH` `Fail2Ban` `Lynis` `ssh-audit` `Blue Team` `SSH Security`
 
+| | |
+|---|---|
+| **Focus** | Taking the one exposed service through a full assessment-to-hardening-to-validation cycle |
+| **Difficulty** | Intermediate |
+| **Duration** | ~2 hours |
+| **Tools** | Nmap, Nmap NSE, Lynis, Fail2Ban, `ssh-audit`, OpenSSH |
+
 ## Architecture
 
 ```mermaid
@@ -310,3 +317,7 @@ Moves from securing infrastructure services to assessing an application running 
 ---
 
 **Screenshots note:** 10 screenshots are embedded above, covering the key moments of the lab. The full evidence set (18 screenshots, including package installation, key generation, and additional enumeration output) is in [`screenshots/`](screenshots/).
+
+---
+
+[⬅️ Previous: Lab 03 - Network Security & Traffic Analysis](../Lab-03-Network-Security-and-Traffic-Analysis/README.md) &nbsp;|&nbsp; [🏠 Home](../README.md) &nbsp;|&nbsp; ➡️ Next: Lab 05 - Web Application Security Assessment *(planned)*
