@@ -12,8 +12,18 @@
 ## Architecture
 
 ```mermaid
-graph LR
-    A["Discover"] --> B["Enumerate"] --> C["Review Config"] --> D["Audit"] --> E["Deploy Fail2Ban"] --> F["Simulate Attack"] --> G["Key Auth"] --> H["Harden"] --> I["Validate"]
+graph TD
+    A["1. Discover<br/>Ping, Nmap, service detection"]
+    B["2. Enumerate<br/>Auth methods, algorithms, NSE"]
+    C["3. Review Config<br/>sshd -T settings"]
+    D["4. Audit<br/>Lynis Hardening Index"]
+    E["5. Deploy Fail2Ban<br/>SSH jail"]
+    F["6. Simulate Attack<br/>Failed logins -> IP banned"]
+    G["7. Key Authentication<br/>ED25519, passwordless login"]
+    H["8. Harden<br/>Password & root login disabled"]
+    I["9. Validate<br/>ssh-audit"]
+
+    A --> B --> C --> D --> E --> F --> G --> H --> I
 ```
 
 Full flow diagram: [`architecture/lab-flow-diagram.md`](architecture/lab-flow-diagram.md). Same infrastructure as Labs 01-03: Kali (`192.168.56.10`) assessing and attacking Ubuntu Server 24.04 (`192.168.56.20`).
