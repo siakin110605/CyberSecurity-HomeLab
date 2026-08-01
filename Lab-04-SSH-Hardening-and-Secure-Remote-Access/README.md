@@ -342,4 +342,4 @@ Moves from securing infrastructure services to assessing an application running 
 
 ---
 
-[⬅️ Previous: Lab 03 - Network Security & Traffic Analysis](../Lab-03-Network-Security-and-Traffic-Analysis/README.md) &nbsp;|&nbsp; [🏠 Home](../README.md) &nbsp;|&nbsp; ➡️ Next: Lab 05 - Web Application Security Assessment *(planned)*
+[⬅️ Previous: Lab 03 - Network Security & Traffic Analysis](../Lab-03-Network-Security-and-Traffic-Analysis/README.md) &nbsp;|&nbsp; [🏠 Home](../README.md) &nbsp;|&nbsp; [➡️ Next: Lab 05 - Web Application Security Assessment](../Lab-05-Web-Application-Security-Assessment/README.md)

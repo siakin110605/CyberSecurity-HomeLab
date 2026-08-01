@@ -14,7 +14,7 @@ I created this homelab to deepen my practical cybersecurity skills through hands
 | [Lab 02](Lab-02-Linux-Hardening/) | Enterprise Linux Hardening & Security Baseline | ✅ Complete |
 | [Lab 03](Lab-03-Network-Security-and-Traffic-Analysis/) | Network Security & Traffic Analysis | ✅ Complete |
 | [Lab 04](Lab-04-SSH-Hardening-and-Secure-Remote-Access/) | SSH Hardening & Secure Remote Access | ✅ Complete |
-| Lab 05 | Web Application Security Assessment | 🟡 Planned |
+| [Lab 05](Lab-05-Web-Application-Security-Assessment/) | Web Application Security Assessment | ✅ Complete |
 | Lab 06 | Detection Engineering & System Monitoring | 🟡 Planned |
 | Lab 07 | Windows Security & Active Directory | 🟡 Planned |
 | Lab 08 | Enterprise Attack Simulation & Incident Response | 🟡 Planned |
