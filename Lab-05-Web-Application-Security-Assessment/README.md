@@ -294,6 +294,19 @@ The same `1' OR '1'='1` payload that Finding 2 showed being correctly blocked at
 | 5 | Missing security headers / insecure cookie flags | A05:2021 - Security Misconfiguration | Medium |
 | 6 | Security-level bypass via cookie tampering | A04:2021 - Insecure Design | High |
 
+## MITRE ATT&CK Mapping
+
+OWASP Top 10 is the primary framework for this lab since every finding is an application-layer issue, which is what OWASP is built to categorize. MITRE ATT&CK is included alongside it, as in Labs 02 and 03, to show how the same findings correspond to adversary technique behavior once an attacker is actually using them, not as a replacement for the OWASP mapping above.
+
+| Finding | Related ATT&CK Technique(s) | Note |
+|---|---|---|
+| 1. Docker/UFW firewall bypass | T1599 - Network Boundary Bridging | Bypassing a network-layer security boundary control |
+| 2. SQL Injection | T1190 - Exploit Public-Facing Application; T1552 - Unsecured Credentials | Initial exploitation, then credential exposure as impact |
+| 3. Command Injection | T1190 - Exploit Public-Facing Application; T1059 - Command and Scripting Interpreter | Exploitation leading to arbitrary command execution |
+| 4. Stored XSS | T1185 - Browser Session Hijacking | Realistic downstream impact if combined with Finding 5's missing `HttpOnly` flag |
+| 5. Missing headers / cookie flags | T1595.002 - Active Scanning: Vulnerability Scanning | How this was identified (Nikto), not how it would be exploited directly |
+| 6. Cookie tampering bypass | T1211 - Exploitation for Defense Evasion | Defeating a defensive security control through client-side manipulation |
+
 ## Verification Summary
 
 | Check | Status |
@@ -337,6 +350,8 @@ Every finding in this lab was identified by an assessor who already knew what to
 ---
 
 **Scope note:** every exploitation technique in this lab was performed against DVWA, a deliberately vulnerable application, running in an isolated internal network with no exposure to the host's real network or the internet. No technique here was used against production infrastructure or any system outside this lab.
+
+**Screenshots note:** 12 screenshots are embedded above, covering the key moments of each finding. The full evidence set (24 screenshots, including baseline checks, the Docker/DVWA deployment, and the Nikto scan in progress) is in [`screenshots/`](screenshots/).
 
 ---
 

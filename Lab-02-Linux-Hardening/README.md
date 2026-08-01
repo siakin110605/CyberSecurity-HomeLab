@@ -64,7 +64,7 @@ A newly deployed Ubuntu 24.04 workstation has been delivered to the Security Tea
 - Harden the SSH daemon beyond the baseline established in Lab 01.
 - Deploy host-level auditing (`auditd`) and prove, with a real triggered event, that a custom detection rule works.
 
-## Environment and Baseline
+## Environment
 
 This lab reuses the Ubuntu Server 24.04.4 LTS VM (`sia-VirtualBox`, `192.168.56.20`) built in Lab 01. No new virtual machines were created; every command below was run over the SSH key-based connection established there.
 

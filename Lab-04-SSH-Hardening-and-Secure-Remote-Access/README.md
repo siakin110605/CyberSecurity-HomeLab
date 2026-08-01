@@ -36,7 +36,7 @@ Lab 03 identified SSH as the single service exposed on the hardened Ubuntu host 
 
 Perform a security assessment of an OpenSSH service, identify its exposed configuration, implement industry-standard hardening techniques, protect the service against brute-force attacks, replace password-based authentication with public-key authentication, and validate the effectiveness of the implemented security controls.
 
-## Lab Environment
+## Environment
 
 | | Kali Linux | Ubuntu Server |
 |---|---|---|
