@@ -355,4 +355,4 @@ Every finding in this lab was identified by an assessor who already knew what to
 
 ---
 
-[⬅️ Previous: Lab 04 - SSH Hardening & Secure Remote Access](../Lab-04-SSH-Hardening-and-Secure-Remote-Access/README.md) &nbsp;|&nbsp; [🏠 Home](../README.md) &nbsp;|&nbsp; ➡️ Next: Lab 06 - Detection Engineering & System Monitoring *(planned)*
+[⬅️ Previous: Lab 04 - SSH Hardening & Secure Remote Access](../Lab-04-SSH-Hardening-and-Secure-Remote-Access/README.md) &nbsp;|&nbsp; [🏠 Home](../README.md) &nbsp;|&nbsp; [➡️ Next: Lab 06 - Detection Engineering & System Monitoring](../Lab-06-Detection-Engineering-and-System-Monitoring/README.md)
