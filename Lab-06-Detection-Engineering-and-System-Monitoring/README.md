@@ -156,7 +156,9 @@ The scan completed and returned results as expected. Nothing appeared in `detect
 
 **MITRE Mapping.** **T1190 - Exploit Public-Facing Application.**
 
-**Severity.** **High** as a detection result (meaning: this finding demonstrates a working, valuable detection, not a vulnerability). The underlying SQL Injection vulnerability itself was already rated Critical in Lab 05.
+**Detection Value.** **High.** This finding demonstrates a working, valuable detection control, not a new vulnerability.
+
+**Underlying Vulnerability Severity.** **Critical** (rated in Lab 05, Finding 2; unchanged by this lab's detection result).
 
 **Remediation.** N/A, this finding documents a working control. The main risk going forward is regex fragility: the current pattern set catches the specific payload shapes tested, not every possible SQL injection syntax variant.
 
@@ -174,11 +176,13 @@ The scan completed and returned results as expected. Nothing appeared in `detect
 [ALERT] auditd :: Ύποπτη εκτέλεση: cat (T1059)
 ```
 
-**Security Impact.** The command ran inside the DVWA Docker container, not directly on the Ubuntu host, yet host-level `auditd` still caught it. This is worth stating precisely: containers share the host kernel rather than running their own, unlike the Kali/Ubuntu split in this homelab, which are genuinely separate VMs with separate kernels. A detection boundary does not automatically align with a virtualization boundary the way it might be assumed to. Host-based auditing of `execve` catches container process execution "for free," which is a real defensive advantage of this architecture, not something that was deliberately engineered for this lab.
+**Security Impact.** The command ran inside the DVWA Docker container, not directly on the Ubuntu host, yet host-level `auditd` still caught it. This is worth stating precisely: containers share the host kernel rather than running their own, unlike the Kali/Ubuntu split in this homelab, which are genuinely separate VMs with separate kernels. A detection boundary does not automatically align with a virtualization boundary the way it might be assumed to. Host-level auditing of `execve` therefore provides visibility into container process execution without requiring a separate in-container audit agent, a genuine defensive advantage of this architecture, not something deliberately engineered for this lab.
 
 **MITRE Mapping.** **T1190 - Exploit Public-Facing Application** (the entry vector); **T1059 - Command and Scripting Interpreter** (the resulting execution).
 
-**Severity.** **High** as a detection result, for the same reason as Finding 3.
+**Detection Value.** **High**, for the same reason as Finding 3.
+
+**Underlying Vulnerability Severity.** **Critical** (rated in Lab 05, Finding 3).
 
 **Remediation.** N/A, working control. Worth extending the exec watchlist beyond the current fixed set (`whoami`, `cat`, `id`, `nc`, `ncat`, `bash`, `wget`, `curl`) as new attack patterns are identified.
 
