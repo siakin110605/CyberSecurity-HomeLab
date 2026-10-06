@@ -401,4 +401,4 @@ Every lab so far has been Linux-only. The next lab extends this homelab into a W
 
 ---
 
-[⬅️ Previous: Lab 05 - Web Application Security Assessment](../Lab-05-Web-Application-Security-Assessment/README.md) &nbsp;|&nbsp; [🏠 Home](../README.md) &nbsp;|&nbsp; ➡️ Next: Lab 07 - Windows Security & Active Directory *(planned)*
+[⬅️ Previous: Lab 05 - Web Application Security Assessment](../Lab-05-Web-Application-Security-Assessment/README.md) &nbsp;|&nbsp; [🏠 Home](../README.md) &nbsp;|&nbsp; [➡️ Next: Lab 07 - Windows Security & Active Directory](../Lab-07-Windows-Security-and-Active-Directory/README.md)
