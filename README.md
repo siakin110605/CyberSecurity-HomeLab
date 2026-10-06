@@ -17,7 +17,7 @@ I created this homelab to deepen my practical cybersecurity skills through hands
 | [Lab 05](Lab-05-Web-Application-Security-Assessment/) | Web Application Security Assessment | ✅ Complete |
 | [Lab 06](Lab-06-Detection-Engineering-and-System-Monitoring/) | Detection Engineering & System Monitoring | ✅ Complete |
 | [Lab 07](Lab-07-Windows-Security-and-Active-Directory/) | Windows Security & Active Directory | ✅ Complete |
-| Lab 08 | Enterprise Attack Simulation & Incident Response | 🟡 Planned |
+| [Lab 08](Lab-08-Enterprise-Attack-Simulation-and-Incident-Response/) | Enterprise Attack Simulation & Incident Response | ✅ Complete |
 
 Each lab folder is self-contained and includes:
 

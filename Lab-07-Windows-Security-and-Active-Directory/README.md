@@ -309,4 +309,4 @@ The final lab in the series ties the Linux and Windows halves together into a si
 
 ---
 
-[⬅️ Previous: Lab 06 - Detection Engineering & System Monitoring](../Lab-06-Detection-Engineering-and-System-Monitoring/README.md) &nbsp;|&nbsp; [🏠 Home](../README.md) &nbsp;|&nbsp; ➡️ Next: Lab 08 - Enterprise Attack Simulation & Incident Response *(planned)*
+[⬅️ Previous: Lab 06 - Detection Engineering & System Monitoring](../Lab-06-Detection-Engineering-and-System-Monitoring/README.md) &nbsp;|&nbsp; [🏠 Home](../README.md) &nbsp;|&nbsp; [➡️ Next: Lab 08 - Enterprise Attack Simulation & Incident Response](../Lab-08-Enterprise-Attack-Simulation-and-Incident-Response/README.md)
