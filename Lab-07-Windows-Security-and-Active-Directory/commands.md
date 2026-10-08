@@ -78,8 +78,8 @@ auditpol /get /category:"Logon/Logoff","Account Logon","Account Management"
 
 ```powershell
 # Create two target users (on the DC). Password meets the new 14-char policy.
-New-ADUser -Name "John Doe"  -SamAccountName "jdoe"   -UserPrincipalName "jdoe@CYBERLAB.local"   -AccountPassword (ConvertTo-SecureString "CyberLabP@ss2025" -AsPlainText -Force) -Enabled $true -PasswordNeverExpires $true
-New-ADUser -Name "Anna Smith" -SamAccountName "asmith" -UserPrincipalName "asmith@CYBERLAB.local" -AccountPassword (ConvertTo-SecureString "CyberLabP@ss2025" -AsPlainText -Force) -Enabled $true -PasswordNeverExpires $true
+New-ADUser -Name "John Doe"  -SamAccountName "jdoe"   -UserPrincipalName "jdoe@CYBERLAB.local"   -AccountPassword (ConvertTo-SecureString "<lab-test-password>" -AsPlainText -Force) -Enabled $true -PasswordNeverExpires $true
+New-ADUser -Name "Anna Smith" -SamAccountName "asmith" -UserPrincipalName "asmith@CYBERLAB.local" -AccountPassword (ConvertTo-SecureString "<lab-test-password>" -AsPlainText -Force) -Enabled $true -PasswordNeverExpires $true
 Get-ADUser -Filter * | Select Name, SamAccountName, Enabled
 ```
 

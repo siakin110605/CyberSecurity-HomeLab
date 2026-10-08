@@ -44,7 +44,7 @@ graph LR
 ## The planted weakness
 
 A service account `svc-backup` was created with a weak, predictable password
-(`Welcome2025!!!`) that satisfies the Lab 07 password policy (14+ chars, complex)
+(`<svc-backup-test-password>`) that satisfies the Lab 07 password policy (14+ chars, complex)
 yet is trivially guessable, simulating the single most common real-world AD
 weakness: a set-and-forget service-account password. Everything else in the
 domain keeps the Lab 07 hardening.

@@ -2,7 +2,7 @@
 
 ## A strong password policy does not stop a weak password choice
 
-The Lab 07 hardening forced 14-character, complex passwords, and I believed that was the password problem solved. Then `svc-backup` fell to a spray on the very first realistic guess, `Welcome2025!!!`, which is 14 characters, has upper/lower/digit/symbol, and sails through the policy while being exactly the kind of thing a rushed admin types for a service account. The policy constrains the shape of a password, not its guessability. The spray also stayed under the five-attempt lockout threshold by design, so neither of Lab 07's two headline controls (length policy, lockout) stopped the foothold. The real gaps the policy cannot close are human choice and the structural blind spot of lockout against spraying, which is why detection had to carry the rest.
+The Lab 07 hardening forced 14-character, complex passwords, and I believed that was the password problem solved. Then `svc-backup` fell to a spray on the very first realistic guess, `<svc-backup-test-password>`, which is 14 characters, has upper/lower/digit/symbol, and sails through the policy while being exactly the kind of thing a rushed admin types for a service account. The policy constrains the shape of a password, not its guessability. The spray also stayed under the five-attempt lockout threshold by design, so neither of Lab 07's two headline controls (length policy, lockout) stopped the foothold. The real gaps the policy cannot close are human choice and the structural blind spot of lockout against spraying, which is why detection had to carry the rest.
 
 ## Offline attacks live where none of my prevention controls can reach
 
